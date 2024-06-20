@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  schedule:
+    - cron: '0 0,5,10,15,20 * * 5'
+    - cron: '0 0,5,10,15,20 * * 6'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Git
+      run: |
+        git config --global user.name "chinesefirewall"
+        git config --global user.email "adebayoniyi2000@yahoo.com"
+
+    - name: Check Git status
+      run: git status
+
+    - name: Show current directory
+      run: pwd
+
+    - name: List files in the directory
+      run: ls -al
+
+    - name: Display current branch
+      run: git branch
+
+    - name: Run a one-line script
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        echo " " >> README.md
+        git add README.md
+        git commit -m "Always green!" || echo "No changes to commit"
+        git push
