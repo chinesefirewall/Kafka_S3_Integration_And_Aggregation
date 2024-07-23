@@ -3,7 +3,6 @@ name: CI
 on:
   schedule:
     - cron: '0 0,5,10,15,20 * * 5'
-    - cron: '0 0,5,10,15,20 * * 6'
   workflow_dispatch:
 
 jobs:
